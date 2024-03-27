@@ -40,3 +40,4 @@ do
   fi
 done
 
+echo "You guessed it in $NUM_TRIES tries. The secret number was $RANDOM_NUMBER. Nice job!"
