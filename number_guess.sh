@@ -20,6 +20,11 @@ fi
 
 echo -e "Guess the secret number between 1 and 1000:"
 read $GUESS
+if ! [[ $GUESS =~ ^[0-9]+$ ]]
+then
+  echo -e "That is not an integer, guess again:"
+  read $GUESS
+fi
 
 NUM_TRIES=1
 
@@ -30,6 +35,11 @@ do
     NUM_TRIES=$NUM_TRIES + 1
     echo -e "It's lower than that, guess again:"
     read $GUESS
+    if ! [[ $GUESS =~ ^[0-9]+$ ]]
+    then
+      echo -e "That is not an integer, guess again:"
+      read $GUESS
+    fi
   fi
 
   if [[ $RANDOM_NUMBER -gt $GUESS ]]
@@ -37,6 +47,11 @@ do
   NUM_TRIES=$NUM_TRIES + 1
     echo -e "It's higher than that, guess again:"
     read $GUESS
+    if ! [[ $GUESS =~ ^[0-9]+$ ]]
+    then
+      echo -e "That is not an integer, guess again:"
+      read $GUESS
+    fi
   fi
 done
 
