@@ -18,7 +18,7 @@ then
 else
   echo "Welcome, $USERNAME! It looks like this is your first time here."
 
-  $PSQL "INSERT INTO users (username) VALUES ('$USERNAME')"
+  DATA=$($PSQL "INSERT INTO users (username) VALUES ('$USERNAME')")
   USER_ID=$($PSQL "SELECT user_id FROM users WHERE username='$USERNAME'")
 fi
 
