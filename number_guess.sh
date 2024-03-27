@@ -1,16 +1,20 @@
 #!/bin/bash
 
-PSQL="psql --username=freecodecamp --dbname=<database_name> -t --no-align -c"
+PSQL="psql --username=freecodecamp --dbname=number_guess -t --no-align -c"
 
 RANDOM_NUMBER=$(($RANDOM%1000+1))
 
 echo -e "Enter your username:"
 read $USERNAME
 
-DATA=$($PSQL "SELECT username FROM users WHERE username=$USERNAME")
+DATA=$($PSQL "SELECT user_id FROM users WHERE username=$USERNAME")
 
 if [[ $DATA ]]
 then
+  echo $DATA | while read USER_ID
+
+  DATA=$($PSQL "SELECT COUNT(game_id), MIN(num_tries) FROM games WHERE user_id=$USER_ID")
+  echo $DATA | while read NUM_GAMES HIGH_SCORE
   echo "Welcome back, $USERNAME! You have played $NUM_GAMES games, and your best game took $HIGH_SCORE guesses."
 else
   echo "Welcome, $USERNAME! It looks like this is your first time here."
